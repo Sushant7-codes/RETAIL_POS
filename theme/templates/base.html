@@ -13,6 +13,7 @@
 <body class="bg-gray-50 text-black font-serif leading-normal tracking-normal">
 
 {% block default_view %}
+{% csrf_token %}
     <div class="toast toast-top toast-end">
         <div class="alert alert-info">
             <span>Hello from daisyUi 👋</span>
@@ -27,6 +28,7 @@
 {% endblock default_view %}
 
 {% block login %}
+{% csrf_token %}
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
   
@@ -381,6 +383,7 @@
 
 
 {% block register %}
+{% csrf_token %}
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
   
@@ -653,6 +656,9 @@
   .stagger-8 { animation-delay: 0.8s; }
   .stagger-9 { animation-delay: 0.9s; }
   .stagger-10 { animation-delay: 1.0s; }
+
+  {% comment %} here are the changes for as an admin and as a cashier {% endcomment %}
+
 </style>
 
 <div class="min-h-screen flex items-center justify-center animated-bg p-4 relative">
@@ -754,24 +760,35 @@
       </div>
 
       <!-- Submit -->
-      <button type="submit" class="fade-in stagger-9 neon-button w-full py-4 px-4 rounded-xl font-bold text-white text-lg shadow-lg transform transition-all duration-300 relative overflow-hidden">
+      {% comment %} <button type="submit" class="fade-in stagger-9 neon-button w-full py-4 px-4 rounded-xl font-bold text-white text-lg shadow-lg transform transition-all duration-300 relative overflow-hidden">
         <span class="relative z-10">CREATE ACCOUNT</span>
-      </button>
+      </button> {% endcomment %}
 
-      <!-- Divider -->
-      {% comment %} <div class="flex items-center justify-center my-8 fade-in stagger-9">
-        <span class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-400 to-transparent"></span>
-        <span class="text-sm text-slate-400 font-semibold px-4 whitespace-nowrap">OR REGISTER VIA</span>
-        <span class="h-px flex-1 bg-gradient-to-r from-transparent via-slate-400 to-transparent"></span>
+      <div class="w-full max-w-lg glass-ultra cyber-glow rounded-2xl shadow-2xl p-8 sm:p-10 relative">
+      <!-- Header -->
+      <div class="fade-in stagger-1">
+      <h2 class="text-2xl sm:text-3xl font-black text-center mb-2 title-glow">REGISTER AS:</h2>
+      {% comment %} <div class="w-20 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 mx-auto rounded-full mb-4"></div> {% endcomment %}
+      <div class="w-20 h-1 mx-auto rounded-full mb-4"></div>
       </div>
 
-      <!-- Social Register -->
-      <div class="flex flex-col sm:flex-row gap-4 fade-in stagger-10">
-        <button type="button"
-          class="social-button flex-1 py-3 px-4 rounded-xl text-slate-300 font-semibold transition-all duration-300 relative overflow-hidden">
-          <span class="relative z-10">Google</span>
+      <div class="account-role-selector fade-in stagger-9 relative">
+        <!-- Original submit (single) -->
+        <button type="submit" class="single-btn neon-button w-full py-4 ...">
+          CREATE ACCOUNT
         </button>
-      </div> {% endcomment %}
+        <!-- Hidden role-specific buttons -->
+        <div class="role-buttons absolute inset-0 flex">
+          <button type="submit" name="role" value="admin" class="neon-button w-1/2 py-4 ..." style="color: white;">
+            ADMIN
+          </button>
+          <button type="submit" name="role" value="cashier" class="neon-button w-1/2 py-4 ..." style="color: white;">
+            CASHIER
+          </button>
+        </div>
+      </div>
+      </div>
+
 
       <!-- Login link -->
       <p class="text-sm text-slate-400 text-center mt-8 fade-in stagger-10">
@@ -817,9 +834,27 @@
   // Create particles periodically
   setInterval(createParticle, 2000);
 
-  // Password matching validation
+  // Here are the changes for "as admin and as cashier"
+
+
 </script>
 {% endblock register %}
+
+{% comment %} SALES/HOME.HTML FROM HERE {% endcomment %}
+
+{% block sales_home %}
+<div>
+    Hello, this is the sales-home page !! It is directed if you logged in as cashier !!
+</div>
+{% endblock sales_home %}
+
+{% block admin_dashboard %}
+<div>
+    Hello, this is the admin-dashboard page !! It is directed if you logged in as admin !!
+</div>
+{% endblock admin_dashboard %}
+
+
 
 </body>
 </html>
