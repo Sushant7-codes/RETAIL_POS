@@ -1,5 +1,6 @@
 // Here are the scripts of login.html
 
+
   const togglePassword = document.getElementById("togglePassword");
   const password = document.getElementById("password");
 
