@@ -70,3 +70,7 @@
   // Here are the changes for "as admin and as cashier"
 
 
+// click the admin and cashier button and be redirected to the login page validation
+  function setRole(role) {
+    document.getElementById('role-input').value = role;
+  }

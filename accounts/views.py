@@ -10,3 +10,4 @@ def register_view(request):
 
 def home_redirect(request):
     return redirect('/accounts/login/')
+
